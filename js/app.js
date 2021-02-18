@@ -53,7 +53,8 @@ function buildNavMenu() {
 function highlightActiveSection() {
   const sections = document.querySelectorAll("section[data-nav]");
   let closestTop = window.innerHeight; // tracks the closest DomRect.top to viewport
-  let active = 0; // stores the index of the active section
+  let negClosestTop = -10 * window.innerHeight; // tracks the closest negative DomRect.top to viewport, in case no positive ones are found
+  let active = -1; // stores the index of the active section
   sections.forEach((section, i) => {
     section.classList.remove('your-active-class')
     let rectTop = section.getBoundingClientRect().top;
@@ -61,8 +62,17 @@ function highlightActiveSection() {
       closestTop = rectTop;
       active = i;
     }
+    // check in case active section is larger than the view port (top < 0)
+    else if (rectTop < 0 && rectTop > negClosestTop && active <= 0) {
+      negClosestTop = rectTop
+      active = i * -1
+    }
   })
-  sections[active].classList.add('your-active-class');
+  if (active >= 0) {
+    sections[active].classList.add('your-active-class');
+  } else {
+    sections[active * -1].classList.add('your-active-class');
+  }
 }
 // Scroll to anchor ID using scrollTO event
 
