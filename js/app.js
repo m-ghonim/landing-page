@@ -17,7 +17,8 @@
  * Define Global Variables
  *
  */
-
+// Used to allow async scroll event listener to improve performance
+let scrolling = true;
 /**
  * End Global Variables
  * Start Helper Functions
@@ -48,8 +49,21 @@ function buildNavMenu() {
   navList.appendChild(navMenu);
 }
 
-// Add class 'active' to section when near top of viewport
-
+// Add class 'active' to section closest to the top of viewport
+function highlightActiveSection() {
+  const sections = document.querySelectorAll("section[data-nav]");
+  let closestTop = window.innerHeight; // tracks the closest DomRect.top to viewport
+  let active = 0; // stores the index of the active section
+  sections.forEach((section, i) => {
+    section.classList.remove('your-active-class')
+    let rectTop = section.getBoundingClientRect().top;
+    if (rectTop > 0 && rectTop < closestTop) {
+      closestTop = rectTop;
+      active = i;
+    }
+  })
+  sections[active].classList.add('your-active-class');
+}
 // Scroll to anchor ID using scrollTO event
 
 /**
@@ -59,9 +73,21 @@ function buildNavMenu() {
  */
 
 // Build menu
-window.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener("DOMContentLoaded", () => {
   buildNavMenu();
 });
+
 // Scroll to section on link click
 
-// Set sections as active
+
+// Set sections as active when scrolling
+window.addEventListener('scroll', () => {
+  scrolling = true;
+})
+// ensure the highlight function is fired async. and not repeatedly
+setInterval( () => {
+  if (scrolling) {
+    scrolling = false;
+    highlightActiveSection();
+  }
+}, 50 );
