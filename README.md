@@ -36,6 +36,8 @@ This projects is a a multi-section landing page, with a dynamically constructed 
 
 ### highlightActiveSection()
 - Highlights the section closest to the top edge of the view port by adding the css class `your-active-class` to it and removing it from other sections
+- Highlights the section's own navigation link using the css class `active-nav-link`
+- Since this function should be called everytime a scroll event happens, a `setInterval()` function is used to avoid throttling
 
 ### scrollToAnchorID(a)
 - Can be added to the click event of any anchor linked to an element ID to smoothly scroll vertically to the element upon clicking the anchor
@@ -49,3 +51,4 @@ This projects is a a multi-section landing page, with a dynamically constructed 
 - fix: Highlight active section if it's larger than the viewport
 - Add smooth scroll to nav links
 - fix: Highlight active section if its top edge matches viewport top
+- feat: Add nav link highlight for active section
