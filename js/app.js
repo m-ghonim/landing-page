@@ -57,7 +57,7 @@ function highlightActiveSection() {
   let active = -1; // stores the index of the active section
   sections.forEach((section, i) => {
     section.classList.remove('your-active-class')
-    let rectTop = section.getBoundingClientRect().top;
+    const rectTop = section.getBoundingClientRect().top;
     if (rectTop > 0 && rectTop < closestTop) {
       closestTop = rectTop;
       active = i;
@@ -74,20 +74,39 @@ function highlightActiveSection() {
     sections[active * -1].classList.add('your-active-class');
   }
 }
-// Scroll to anchor ID using scrollTO event
 
+/**
+ * @description Smoothly scroll to the element with ID linked to an anchor upon clicking the anchor
+ * @param {event object} a - Event object passed from the clicked <a> element
+ */
+// Uses Window.scroll(), while Element.scrollIntoView() is the better option, smooth behaviour isn't fully supported
+// in some older browsers that are still compatible with ES6
+// https://caniuse.com/?search=scrollintovie
+function scrollToAnchorID(a) {
+  a.preventDefault();
+  const anchorEleemnt = document.getElementById(a.target.getAttribute("href").slice(1));
+  const y = anchorEleemnt.getBoundingClientRect().top + window.scrollY;
+  window.scroll({
+    top: y,
+    behavior: 'smooth'
+  });
+}
 /**
  * End Main Functions
  * Begin Events
  *
  */
 
-// Build menu
+// DOM Content Loaded Actions
 window.addEventListener("DOMContentLoaded", () => {
+  // construct dynamic navigation menu
   buildNavMenu();
+  // Add smooth scroll event to navigation menu
+  let navLinks = document.querySelectorAll('nav li a[href^="#"]');
+  for (navLink of navLinks) {
+    navLink.addEventListener('click', scrollToAnchorID);
+  }
 });
-
-// Scroll to section on link click
 
 
 // Set sections as active when scrolling
