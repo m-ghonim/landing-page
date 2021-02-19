@@ -2,7 +2,14 @@
 
 ## Table of Contents
 
-* [Features](#Features)
+* [Features](#features)
+    - [Dynamic Navigation Menu](#dynamic-navigation-menu)
+    - [Active Section and Navigation Link Highlight](#active-section-and-navigation-link-highlight)
+* [Function Documentation](#function-documentation)
+    - [buildNavMenu()](#buildnavmenu-)
+	- [highlightActiveSection()](#highlightactivesection-)
+	- [scrollToAnchorID(a)](#scrolltoanchorida)
+* [Version History](#version-history)
 
 ## Features
 Based on [starter files](https://github.com/udacity/fend/tree/refresh-2019/projects/landing-page) from Udacity FEND repo.
@@ -19,7 +26,7 @@ This projects is a a multi-section landing page, with a dynamically constructed 
 - The section's navigation link is also highlighted using the css class `active-nav-link`
 
 ## Function Documentation
-### buildNavMenu()
+### buildNavMenu( )
 - Can be called at run time to construct/reconstruct the navigation menu by creating a nav menu entry for each `section` in the page with `data-nav` attribute
 - Each entry is constructed as
 ```
@@ -34,7 +41,7 @@ This projects is a a multi-section landing page, with a dynamically constructed 
 - The navlink data attribute is used to highlight the link when its section is inside viewport
 - After the menu is constructed, it's appended to the element with `id="navbar__list"` which should be a `ul` element
 
-### highlightActiveSection()
+### highlightActiveSection( )
 - Highlights the section closest to the top edge of the view port by adding the css class `your-active-class` to it and removing it from other sections
 - Highlights the section's own navigation link using the css class `active-nav-link`
 - Since this function should be called everytime a scroll event happens, a `setInterval()` function is used to avoid throttling
