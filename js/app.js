@@ -52,7 +52,9 @@ function buildNavMenu() {
   navList.appendChild(navMenu);
 }
 
-// Add class 'active' to section closest to the top of viewport
+/**
+ * @description Add highlighting class to section closest to the top of viewport and its linked nav entry
+ */
 function highlightActiveSection() {
   const sections = document.querySelectorAll("section[data-nav]");
   let closestTop = window.innerHeight; // tracks the closest DomRect.top to viewport
