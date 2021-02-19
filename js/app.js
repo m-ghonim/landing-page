@@ -58,7 +58,7 @@ function highlightActiveSection() {
   sections.forEach((section, i) => {
     section.classList.remove('your-active-class')
     const rectTop = section.getBoundingClientRect().top;
-    if (rectTop > 0 && rectTop < closestTop) {
+    if (rectTop >= 0 && rectTop < closestTop) {
       closestTop = rectTop;
       active = i;
     }
