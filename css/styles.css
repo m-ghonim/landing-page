@@ -88,6 +88,14 @@ section {
     transition: ease 0.3s all;
 }
 
+/* style nav link when its section is active (inside view port)*/
+.navbar__menu .menu__link.active-nav-link {
+    background: rgb(136,203,171);
+    background: linear-gradient(0deg, rgba(0,13,60,1) 0%, rgb(101, 120, 189) 100%);
+    color: #fff;
+    /* transition: ease 0.3s all; */
+}
+
 /* Header Styles */
 .page__header {
     background: #fff;
